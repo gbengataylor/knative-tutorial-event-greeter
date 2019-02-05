@@ -1,10 +1,11 @@
-FROM gcr.io/cloud-builders/mvn
+FROM maven:3.6.0-jdk-8-slim as builder
 COPY . /project
-CMD ["-B","-DskipTests", "install" ]
+WORKDIR /project
+RUN mvn -B -DskipTests install
 
 FROM docker.io/fabric8/java-jboss-openjdk8-jdk:1.5.4
 USER jboss
 ENV JAVA_APP_DIR=/deployments
 EXPOSE 8080
-COPY --from=0 /project/target/event-greeter.jar /deployments/
-ENTRYPOINT [ "/deployments/run-java.sh" ]
+COPY --from=builder /project/target/event-greeter.jar /deployments/
+ENTRYPOINT [ "/deployments/run-java.sh"]
