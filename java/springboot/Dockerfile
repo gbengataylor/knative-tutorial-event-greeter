@@ -1,4 +1,4 @@
-FROM maven:3.6.0-jdk-8-slim as builder
+FROM gcr.io/cloud-builders/mvn as builder
 COPY . /project
 WORKDIR /project
 RUN mvn -B -DskipTests install
