@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class EventGreeterController {
 
-    private static final String RESPONSE_STRING_FORMAT = "Event greeter => '%s' : %d\n";
+    private static final String RESPONSE_STRING_FORMAT = "Event greeter => '%s' : %d \n";
 
     private static final String HOSTNAME =
             parseContainerIdFromHostname(System.getenv().getOrDefault("HOSTNAME", "unknown"));
@@ -28,9 +28,8 @@ public class EventGreeterController {
     public @ResponseBody  String greet(@RequestBody String cloudEventJson) {
         count++;
         String greeterHost = String.format(RESPONSE_STRING_FORMAT, HOSTNAME, count);
-        JsonObject response = new JsonObject()
-                .put("host",greeterHost)
-                .put("cloudEventJson",cloudEventJson);
+        JsonObject response = new JsonObject(cloudEventJson)
+                .put("host",greeterHost.replace("\n",""));
         return response.encode();
     }
 
