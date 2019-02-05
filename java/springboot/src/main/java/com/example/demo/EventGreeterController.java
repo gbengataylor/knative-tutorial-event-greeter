@@ -15,7 +15,7 @@ public class EventGreeterController {
             parseContainerIdFromHostname(System.getenv().getOrDefault("HOSTNAME", "unknown"));
 
     static String parseContainerIdFromHostname(String hostname) {
-        return hostname.replaceAll("greeter-v\\d+-", "");
+        return hostname.replaceAll("greeter-v\\d+-", "0.0.2");
     }
 
 
