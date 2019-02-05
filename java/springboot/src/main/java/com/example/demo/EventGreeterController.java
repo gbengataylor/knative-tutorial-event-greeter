@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class EventGreeterController {
 
-    private static final String RESPONSE_STRING_FORMAT = "Event greeter(v0.0.2) => '%s' : %d \n";
+    private static final String RESPONSE_STRING_FORMAT = "Event greeter v0.0.2 => '%s' : %d \n";
 
     private static final String HOSTNAME =
             parseContainerIdFromHostname(System.getenv().getOrDefault("HOSTNAME", "unknown"));
