@@ -1,7 +1,7 @@
 FROM gcr.io/cloud-builders/mvn as builder
 COPY . /project
 WORKDIR /project
-RUN mvn -B -DskipTests install
+RUN mvn -Duser.home=/builder/home -B -DskipTests install
 
 FROM docker.io/fabric8/java-jboss-openjdk8-jdk:1.5.4
 USER jboss
