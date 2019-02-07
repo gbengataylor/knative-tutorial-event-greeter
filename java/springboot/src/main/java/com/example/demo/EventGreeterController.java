@@ -3,11 +3,16 @@ package com.example.demo;
 import io.vertx.core.json.JsonObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * EventGreeterController
  */
 @RestController
 public class EventGreeterController {
+
+    private final SimpleDateFormat SDF = new SimpleDateFormat("HH:mm:ss");
 
     private static final String RESPONSE_STRING_FORMAT = "Event greeter v0.0.2 => '%s' : %d \n";
 
@@ -29,7 +34,8 @@ public class EventGreeterController {
         count++;
         String greeterHost = String.format(RESPONSE_STRING_FORMAT, HOSTNAME, count);
         JsonObject response = new JsonObject(cloudEventJson)
-                .put("host",greeterHost.replace("\n",""));
+                .put("host",greeterHost.replace("\n",""))
+                .put("time",SDF.format(new Date()));
         return response.encode();
     }
 
