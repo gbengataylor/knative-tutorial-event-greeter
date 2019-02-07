@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import io.vertx.core.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -11,6 +13,8 @@ import java.util.Date;
  */
 @RestController
 public class EventGreeterController {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(EventGreeterController.class);
 
     private final SimpleDateFormat SDF = new SimpleDateFormat("HH:mm:ss");
 
@@ -36,6 +40,7 @@ public class EventGreeterController {
         JsonObject response = new JsonObject(cloudEventJson)
                 .put("host",greeterHost.replace("\n",""))
                 .put("time",SDF.format(new Date()));
+        LOGGER.info("Event Message Received {} \n",response.encodePrettily());
         return response.encode();
     }
 
