@@ -37,4 +37,4 @@ src/**
 pom.xml
 mvnw
 mvnw.cmd
-.mvn
+.mvndocker-build.yaml
